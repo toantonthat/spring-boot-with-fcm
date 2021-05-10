@@ -19,8 +19,10 @@ public class PushNotificationService {
 	@Autowired
 	private FCMService fcmService;
 	
-	@Scheduled(initialDelay = 60000, fixedDelay = 60000)
+//	@Scheduled(initialDelay = 5000, fixedDelay = 10000)
+	@Scheduled(fixedRate = 5000)
     public void sendSamplePushNotification() {
+		logger.info("----> send a message");
         try {
             fcmService.sendMessageWithoutData(PushNotificationRequest.builder()
             		.title("Test 1")

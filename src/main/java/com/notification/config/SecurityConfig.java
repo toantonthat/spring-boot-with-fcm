@@ -137,6 +137,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             
             .antMatchers(HttpMethod.GET, "/v1/departments/**")
             .permitAll()
+            
+            .antMatchers(HttpMethod.POST, "/notification/**")
+            .permitAll()
+            
             .antMatchers(HttpMethod.DELETE, "/v1/departments/**")
             .permitAll()
             

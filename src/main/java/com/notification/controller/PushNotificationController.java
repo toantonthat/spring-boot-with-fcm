@@ -19,21 +19,22 @@ public class PushNotificationController {
 	@Autowired
 	private PushNotificationService pushNotificationService;
 
-	@PostMapping("/notification/topic")
+	@PostMapping("/topic")
 	public ResponseEntity<Object> sendNotification(@RequestBody PushNotificationRequest request) {
+		System.out.println("topic");
 		pushNotificationService.sendPushNotificationWithoutData(request);
 		return new ResponseEntity<>(new PushNotificationResponse(HttpStatus.OK.value(), "Notification has been sent."),
 				HttpStatus.OK);
 	}
 
-	@PostMapping("/notification/token")
+	@PostMapping("/token")
 	public ResponseEntity<Object> sendTokenNotification(@RequestBody PushNotificationRequest request) {
 		pushNotificationService.sendPushNotificationToToken(request);
 		return new ResponseEntity<>(new PushNotificationResponse(HttpStatus.OK.value(), "Notification has been sent."),
 				HttpStatus.OK);
 	}
 
-	@PostMapping("/notification/data")
+	@PostMapping("/data")
 	public ResponseEntity<Object> sendDataNotification(@RequestBody PushNotificationRequest request) {
 		pushNotificationService.sendPushNotification(request);
 		return new ResponseEntity<>(new PushNotificationResponse(HttpStatus.OK.value(), "Notification has been sent."),
