@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.notification.model.PushNotificationRequest;
 import com.notification.model.PushNotificationResponse;
+import com.notification.model.SubscriptionRequestDto;
 import com.notification.service.PushNotificationService;
 
 @RestController
@@ -21,7 +22,6 @@ public class PushNotificationController {
 
 	@PostMapping("/topic")
 	public ResponseEntity<Object> sendNotification(@RequestBody PushNotificationRequest request) {
-		System.out.println("topic");
 		pushNotificationService.sendPushNotificationWithoutData(request);
 		return new ResponseEntity<>(new PushNotificationResponse(HttpStatus.OK.value(), "Notification has been sent."),
 				HttpStatus.OK);
@@ -39,5 +39,10 @@ public class PushNotificationController {
 		pushNotificationService.sendPushNotification(request);
 		return new ResponseEntity<>(new PushNotificationResponse(HttpStatus.OK.value(), "Notification has been sent."),
 				HttpStatus.OK);
+	}
+
+	@PostMapping("/subscribe")
+	public String subscribeToTopic(@RequestBody SubscriptionRequestDto subscriptionRequestDto) {
+		return pushNotificationService.subscribeToTopic(subscriptionRequestDto);
 	}
 }

@@ -41,7 +41,8 @@ public class AuthController {
 			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, req.getPassWord()));
 			String token = jwtTokenProvider.createToken(username, this.users.findByUsername(username)
 					.orElseThrow(() -> new UsernameNotFoundException("Username " + username + "not found")).getRoles());
-						
+			System.out.println("token " + token);
+			
 			Map<Object, Object> model = new HashMap<>();
 			model.put("username", username);
 			model.put("token", token);
